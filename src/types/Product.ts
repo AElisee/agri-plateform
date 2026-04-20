@@ -4,9 +4,17 @@ export interface Product {
   culture: string;
   hectare: number;
   location: string;
-  harvest_date: string;  
+  havert_date: string;
   photo?: string;
   is_visible: boolean;
   user_id: string;
-  created_at: string;  
+  created_at: string;
+}
+
+export interface ProductWithUser extends Product {
+  user?: {
+    id: string;
+    name: string;
+  };
+  likesCount?: number;
 }

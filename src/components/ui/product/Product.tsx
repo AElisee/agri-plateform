@@ -1,30 +1,21 @@
 import { useEffect, useState } from "react";
-import type { Product } from "../../../types/Product";
+import type { Product, ProductWithUser } from "../../../types/Product";
 import ProductCard from "./ProductCard";
-import { supabase } from "../../../services/supabaseClient";
+import { fetchProductsWithLikes } from "../../../services/ProductService";
 
 const Product = () => {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [products, setProducts] = useState<ProductWithUser[]>([]);
   useEffect(() => {
-    const fetchProducts = async () => {
+    const loadProducts = async () => {
       try {
-        const { data, error } = await supabase
-          .from<Product>("products")
-          .select("*");
-        // .eq("is_visible", true); // récupère uniquement les produits visibles
-
-        if (error) {
-          console.error("Erreur:", error);
-        } else {
-          setProducts(data || []);
-          console.log("Produits récupérés:", data);
-        }
+        const data = await fetchProductsWithLikes();
+        setProducts(data);
       } catch (error) {
-        console.error("Oups:", error);
+        console.error("Erreur:", error);
       }
     };
 
-    fetchProducts();
+    loadProducts();
   }, []);
   return (
     <div className="w-full md:p-5 p-2 flex flex-col items-center justify-center ">
@@ -34,7 +25,7 @@ const Product = () => {
         </h2>
         <div className="flex gap-5 flex-wrap   justify-center">
           {products.length === 0 ? (
-            <p>Pas de produit en vent</p>
+            <p>Pas de produit en vente</p>
           ) : (
             products.map((product) => (
               <ProductCard key={product.id} product={product} />
