@@ -15,6 +15,8 @@ export interface ProductWithUser extends Product {
   user?: {
     id: string;
     name: string;
+    email: string;
+    contact: string;
   };
   likesCount?: number;
 }

@@ -23,7 +23,7 @@ const Product = () => {
         <h2 className="text-3xl font-medium text-[#00d571]">
           Les produits disponibles chez les cultivateurs en ce moments:
         </h2>
-        <div className="flex gap-5 flex-wrap   justify-center">
+        <div className="flex gap-5 flex-wrap  justify-center">
           {products.length === 0 ? (
             <p>Pas de produit en vente</p>
           ) : (

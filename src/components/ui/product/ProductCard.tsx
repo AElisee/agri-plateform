@@ -34,7 +34,7 @@ const ProductCard = ({ product }: Props) => {
 
           <p>
             <span className="font-semibold text-zinc-500">
-              Début de récolte:
+              Entrée en production:
             </span>{" "}
             {formatDate(product.havert_date)}
           </p>
